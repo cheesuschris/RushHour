@@ -243,8 +243,8 @@ def test_simple_rush_hour_graphplan():
     # BEGIN_YOUR_CODE
 
     p = simple_rush_hour_task()
-    g = GraphPlan(p)
-    l = Linearize(g)
+    g = GraphPlan(p).execute()
+    l = Linearize(GraphPlan(p)).execute()
     return g, l
 
     # END_YOUR_CODE
@@ -255,8 +255,8 @@ def test_complex_rush_hour_graphplan():
     # BEGIN_YOUR_CODE
 
     p = complex_rush_hour_task()
-    g = GraphPlan(p)
-    l = Linearize(g)
+    g = GraphPlan(p).execute()
+    l = Linearize(GraphPlan(p)).execute()
     return g, l
 
     # END_YOUR_CODE
