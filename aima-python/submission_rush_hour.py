@@ -202,7 +202,7 @@ def complex_rush_hour_manual():
 
     # BEGIN_YOUR_CODE
     
-    return ['MoveUp(E, C3_4, C2_4)', 'MoveRight(C, C3_3, C3_4)', 'MoveLeft(D, C3_2, C3_1)', 'MoveUp(A, C4_2, C3_2)', 'MoveUp(B, C4_3, C3_3)', 'MoveRight(R, C4_1, C4_2)', 'MoveRight(R, C4_2, C4_3)', 'MoveRight(R, C4_3, C4_4)']
+    return ['MoveUp(A, C4_2, C3_2)', 'MoveUp(B, C4_3, C3_3)', 'MoveRight(R, C4_1, C4_2)', 'MoveRight(R, C4_2, C4_3)', 'MoveRight(R, C4_3, C4_4)']
 
     # END_YOUR_CODE 
 
