@@ -1,1 +1,0 @@
-### This project covers the game Rush Hour, in which the solver tries to move cars out of the way to get a specific car to a specific goal location.
