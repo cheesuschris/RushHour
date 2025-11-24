@@ -45,6 +45,7 @@ from expanded_rush_hour_feat2ver1 import rush_hour_multistep_with_trucks
 from check_multistep_actions import compare_multistep
 from expanded_rush_hour_featsmergedver1 import rush_hour_6x6_multistep_with_trucks
 from expanded_rush_hour_featsmergedver2 import rush_hour_6x6_multistep_with_trucks2
+from expanded_rush_hour_featsmergedver3 import rush_hour_6x6_multistep_with_trucks3
 
 from planning import *
 import time
@@ -179,8 +180,6 @@ def get_user_config():
             else:
                 config['goal'][name] = ((x1, y1), (x2, y2))
         goal_vehicles.add(name)
-    
-    # Display board and confirm
     display_board(config)
     confirm = input("\nIs this configuration correct? (y/n): ").strip().lower()
     if confirm == 'y':
@@ -192,9 +191,10 @@ def get_user_config():
 
 if __name__ == "__main__":
     
-    print("Current Problem Representations Available (in order of production): 'EX1', 'EX2', '6x61', 'compare6x6', '6x62', 'multistep', 'compareMultistep', '6x6multistep', '6x6multistep2'")
+    print("The most modern solutions are '6x6multistep2' and '6x6multistep3'.")
+    print("Current Problem Representations Available (in order of production): 'EX1', 'EX2', '6x61', 'compare6x6', '6x62', 'multistep', 'compareMultistep', '6x6multistep', '6x6multistep2', '6x6multistep3'")
     problem = input("Enter a problem representation from above to try GraphPlan on (or compare sample answers against original assignment's problem representation) or press q to quit: ")
-    while problem != "q" and problem != "EX1" and problem != "EX2" and problem != "6x61" and problem != "compare6x6" and problem != "6x62" and problem != "multistep" and problem != "compareMultistep" and problem != "6x6multistep" and problem != "6x6multistep2":
+    while problem != "q" and problem != "EX1" and problem != "EX2" and problem != "6x61" and problem != "compare6x6" and problem != "6x62" and problem != "multistep" and problem != "compareMultistep" and problem != "6x6multistep" and problem != "6x6multistep2" and problem != "6x6multistep3":
         problem = input("Please enter a valid problem representation or press q to quit: ")
     
     if problem == "q":
@@ -227,8 +227,11 @@ if __name__ == "__main__":
     elif problem == "6x6multistep2":
         config = get_user_config()
         p = rush_hour_6x6_multistep_with_trucks2(config=config)
+    elif problem == "6x6multistep3":
+        config = get_user_config()
+        p = rush_hour_6x6_multistep_with_trucks3(config=config)
 
-    if problem not in ["q", "compare6x6", "compareMultistep"]:
+    if problem not in ["q", "compare6x6", "compareMultistep", "6x6multistep2"]:
         start = time.time()
         start2 = time.process_time()
         g = GraphPlan(p).execute()
@@ -237,4 +240,107 @@ if __name__ == "__main__":
         end2 = time.process_time()
         print(f"Elapsed Wall time: {end-start} seconds")
         print(f"Elapsed CPU time: {end2-start2} seconds")
-        print(g[0], l)
+        print(l)
+    elif problem == "6x6multistep2":
+        #Postprocessing
+        start = time.time()
+        start2 = time.process_time()
+        g = GraphPlan(p).execute()
+        l = Linearize(p).execute()
+        end = time.time()
+        end2 = time.process_time()
+        print(f"Elapsed Wall time: {end-start} seconds")
+        print(f"Elapsed CPU time: {end2-start2} seconds")
+        l = list(l)
+        parsedList = []
+        for item in l:
+            item = str(item)
+            if "Car" in item:
+                item = item.replace(" ", "")
+                firstComma = item.find(",")
+                secondComma = item.find(",", firstComma+1)
+                thirdComma = item.find(",", secondComma+1)
+                closingParen = item.find(")")
+                item = (
+                    item[:item.find("(")],                     
+                    item[item.find("(")+1:firstComma],         
+                    item[firstComma+1:secondComma],           
+                    item[secondComma+1:thirdComma],          
+                    item[thirdComma+1:closingParen],          
+                )
+            elif "Truck" in item:
+                item = item.replace(" ", "")
+                firstComma = item.find(",")
+                secondComma = item.find(",", firstComma+1)
+                thirdComma = item.find(",", secondComma+1)
+                fourthComma = item.find(",", thirdComma+1)
+                closingParen = item.find(")")
+                item = (
+                    item[:item.find("(")],                     
+                    item[item.find("(")+1:firstComma],         
+                    item[firstComma+1:secondComma],           
+                    item[secondComma+1:thirdComma],
+                    item[thirdComma+1:fourthComma],          
+                    item[fourthComma+1:closingParen],
+                )
+            parsedList.append(item)
+        #GREEDY MERGING: Don't check behind cuz it would've already merged
+        # merged = []
+        # for item in l:
+        #     action, vehicle = item[0], item[1]
+        #     if merged and merged[-1][:2] == (action, vehicle):
+        #         if len(item) == 5:
+        #             merged[-1] = merged[-1][:4] + item[4]
+        #         elif len(item) == 6:
+        #             if len(merged[-1]) == 6:
+        #                 merged[-1] = merged[-1] + item[-1]
+        #             elif len(merged[-1]) == 7:
+        #                 merged[-1] = merged[-1][:5] + merged[-1][-1] + item[-1]
+        #     else:
+        #         merged.append(item)
+        # print(merged)
+
+        #UPON FURTHER THOUGHT AND TRIALS, I CANNOT GREEDY MERGE AS MULTIPLE CORRECT LINEAR SOLUTIONS CAN EXIST
+        #Everytime I tried to add something to merge, I would first have to check backwards through merged 
+        #until I hit the beginning or something I can merge with. Until I hit that point, I would have to 
+        #check the action I'm on if it interrupts my attempt to merge one block (I'm only merging with things 
+        #one block distance away at a time) in that direction.
+        #O(n^2)
+        merged = []
+        for item in parsedList:
+            action, vehicle = item[0], item[1]
+            currentCoords = set(item[2:])
+            placed = False
+            for i in range(len(merged) - 1, -1, -1):
+                prevItem = merged[i]
+                prevCoords = set(prevItem[2:]) 
+                currType = "Car" if "Car" in action else "Truck"
+                prevType = "Car" if "Car" in prevItem[0] else "Truck"
+                isParallelSafe = False
+                if currType == prevType and item[2] != prevItem[2]:
+                    isParallelSafe = True
+                if (prevItem[1] != vehicle) and not currentCoords.isdisjoint(prevCoords) and not isParallelSafe:
+                    merged.insert(i + 1, item)
+                    placed = True
+                    break 
+                if prevItem[:2] == (action, vehicle):
+                    if (len(prevItem) == 5 and prevItem[-1] == item[-2]) or (len(prevItem) == 6 and prevItem[-1] == item[-3]) or (len(prevItem) == 7 and prevItem[-1] == item[-3]):
+                        if len(item) == 5:
+                            merged[i] = merged[i][:4] + (item[4],)
+                        elif len(item) == 6:
+                            if len(merged[i]) == 6:
+                                merged[i] = merged[i] + (item[-1],)
+                            elif len(merged[i]) == 7:
+                                merged[i] = merged[i][:5] + (merged[i][-1],) + (item[-1],)
+                        placed = True
+                        break
+                    else:
+                        # A vehicle cannot interrupt over its past self
+                        merged.insert(i + 1, item)
+                        placed = True
+                        break
+            # Independence
+            if not placed:
+                merged.insert(len(merged), item)
+        print("THE RESULTS OF MERGED MULTI-STEP ACTIONS FOR TRUCKS ARE NOT ORDERED!")
+        print(merged)
