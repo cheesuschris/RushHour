@@ -2,19 +2,17 @@
 
 
 #MERGED FEATURES VER. 1: TAKES FEAT1VER1 AND FEAT2VER1, INTRODUCING BOTH 6X6 GRID & MULTISTEP ACTIONS TO THE NORMAL PROBLEM
-#Took __.____ seconds to find a valid plan - ____
-#No runner for many example configurations yet
+#Could NOT find a valid plan, simply printed "Killed" when I ran this on the sample input. Apparently this happened because of the OOM killer
+#killing the most memory-hungry processes to prevent system crashes. This signaled a VERY computationaly expensive program, very unreasonable
+#No runner for any configuration yet
 
-#From here, ____. 
-#One of my thoughts while making this file was instead of checking AdjacentLeft() that many times, just check if the cells
-#in the same row in that direction are clear? But this might already be addressed. DELETE IF THIS IS STUPID
+#From here, I DEFINITELY need to convert to PDDL and find a more optimal representation. This is addressed in the pddl version of this file
 
 
 #--------------------------------------------------------------------------------------------------------
 
 from planning import *
 from logic import *
-import time
 
 def rush_hour_6x6_multistep_with_trucks(config):
     """
@@ -283,30 +281,3 @@ def rush_hour_6x6_multistep_with_trucks(config):
             'AdjacentUp(C2_6, C1_6) & AdjacentUp(C3_6, C2_6) & AdjacentUp(C4_6, C3_6) & AdjacentUp(C5_6, C4_6) & AdjacentUp(C6_6, C5_6)'
         )
     )
-    
-if __name__ == "__main__":
-    p = rush_hour_6x6_multistep_with_trucks(config = {
-        'cars': {
-            'R': {'pos': (3, 1), 'dir': 'Horizontal'},  
-            'A': {'pos': (1, 1), 'dir': 'Horizontal'},  
-            'B': {'pos': (4, 3), 'dir': 'Vertical'}     
-        },
-        'trucks': {
-            'T1': {'pos': ((3, 2), (4, 2)), 'dir': 'Vertical'},  
-            'T2': {'pos': ((2, 3), (3, 3)), 'dir': 'Vertical'}    
-        },
-        'goal': {
-            'R': (3, 4),                                
-            'T1': ((1, 2), (2, 2))                       
-        }
-    })
-    # print(f"Initial: {p.initial}")
-    # print(f"Goals: {p.goals}")
-    # print(f"Actions: {p.actions}")
-    # print(f"Domain: {p.domain}")
-    start = time.time()
-    g = GraphPlan(p).execute()
-    l = Linearize(p).execute()
-    end = time.time()
-    print(f"Elapsed CPU time: {end-start} seconds")
-    print(g[0], l)

@@ -6,12 +6,10 @@
 
 #--------------------------------------------------------------------------------------------------------
 
-import pytest
 from planning import *
 from logic import *
-import time
 
-def rush_hour_with_trucks(config):
+def rush_hour_with_trucks1(config):
     """
     Returns a PlanningProblem object, emulating rush_hour_4x4()
     """
@@ -140,30 +138,3 @@ def rush_hour_with_trucks(config):
             'AdjacentUp(C2_4, C1_4) & AdjacentUp(C3_4, C2_4) & AdjacentUp(C4_4, C3_4)'
         )
     )
-
-if __name__ == "__main__":
-    p = rush_hour_with_trucks(config = {
-        'cars': {
-            'R': {'pos': (3, 1), 'dir': 'Horizontal'},   # Red car, horizontal
-            'A': {'pos': (1, 1), 'dir': 'Horizontal'},   # Car A, horizontal
-            'B': {'pos': (4, 3), 'dir': 'Vertical'}      # Car B, vertical
-        },
-        'trucks': {
-            'T1': {'pos': ((3, 2), (4, 2)), 'dir': 'Vertical'},  # Horizontal truck
-            'T2': {'pos': ((2, 3), (3, 3)), 'dir': 'Vertical'}     # Vertical truck
-        },
-        'goal': {
-            'R': (3, 4),                                 # Red car must reach exit
-            'T1': ((1, 2), (2, 2))                       # Truck T2 must move up two cells
-        }
-    })
-    # print(f"Initial: {p.initial}")
-    # print(f"Goals: {p.goals}")
-    # print(f"Actions: {p.actions}")
-    # print(f"Domain: {p.domain}")
-    start = time.time()
-    g = GraphPlan(p).execute()
-    l = Linearize(p).execute()
-    end = time.time()
-    print(f"Elapsed CPU time: {end-start} seconds")
-    print(g[0], l)

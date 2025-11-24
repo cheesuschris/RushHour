@@ -5,27 +5,27 @@
 #This representation took a decently long time to solve for Graphplan
 #Took 822.6485 seconds to find a valid plan - 11.5X slower than same problem w/ a normal actionset
 #No 6x6 grid implementation yet
-#No runner for many example configurations yet
+#No runner for any configuration yet
 
 #From here, the partially ordered and linearized plan returns from example_EC_1 and this file shows that the preconditions, actions, 
 #and finalized plans required between the same problem on a multistep action set is a good amount less (but still correct) than on a 
 #normal action set (highlighted in check_multistep_actions.py). While the overall action (path) cost with this multistep-action 
-#feature is less, it similarly explodes the search tree similarly to how the 6x6 grid does; this is due to the extreme precondition
-#checks, as well as the many times more actions now available at each step. 
+#feature is less, it similarly significantly expands the search tree similarly to how a 6x6 grid does; this is due to the extreme many times
+#more actions now available at each step. 
 #There are two things I'm concerned about with this implementation:
 # - I'm worried that the returned solution won't always slide as far as possible, or isn't at max efficiency (how does GraphPlan choose w/o a heuristic?)
-#  --> [RESOLVED] Upon further thought I realize the search BFS will always reach the shortest action first, so it will always choose a correct multi-action step
+#  --> [ANSWERED] Upon further thought I realize BFS will always reach the shortest action plan first, so it will always choose correct multi-action step
 # - I'm worried that for hard-coding multi-step actions for the 6x6 grid (there'll be way more than the ones here), the actions will explode the search tree.
+#  --> [ANSWERED] This DOES explode the search tree in the merged version, I needed to debug this using PDDL and choose a better representation.
 #For now, I'll accept this OK runtime and attempt merging this feature with the 6x6 grid feature. However, if this computationally
-#starts exploding the merged search tree, I'll try dynamic sliding or post-processing sliding (suggested by LLM) in future versions, 
-#and if that doesn't work then I will convert this feature or the merged version to PDDL and debug further. FOR NOW, this feature is OK.
+#starts exploding the merged search tree (it did; see ANSWERED #2), I might try dynamic sliding or post-processing sliding (suggested by LLM) 
+#in future merged versions.
 
 
 #--------------------------------------------------------------------------------------------------------
 
 from planning import *
 from logic import *
-import time
 
 def rush_hour_multistep_with_trucks(config):
     """
@@ -220,30 +220,3 @@ def rush_hour_multistep_with_trucks(config):
             'AdjacentUp(C2_4, C1_4) & AdjacentUp(C3_4, C2_4) & AdjacentUp(C4_4, C3_4)'
         )
     )
-    
-if __name__ == "__main__":
-    p = rush_hour_multistep_with_trucks(config = {
-        'cars': {
-            'R': {'pos': (3, 1), 'dir': 'Horizontal'},  
-            'A': {'pos': (1, 1), 'dir': 'Horizontal'},  
-            'B': {'pos': (4, 3), 'dir': 'Vertical'}     
-        },
-        'trucks': {
-            'T1': {'pos': ((3, 2), (4, 2)), 'dir': 'Vertical'},  
-            'T2': {'pos': ((2, 3), (3, 3)), 'dir': 'Vertical'}    
-        },
-        'goal': {
-            'R': (3, 4),                                
-            'T1': ((1, 2), (2, 2))                       
-        }
-    })
-    # print(f"Initial: {p.initial}")
-    # print(f"Goals: {p.goals}")
-    # print(f"Actions: {p.actions}")
-    # print(f"Domain: {p.domain}")
-    start = time.time()
-    g = GraphPlan(p).execute()
-    l = Linearize(p).execute()
-    end = time.time()
-    print(f"Elapsed CPU time: {end-start} seconds")
-    print(g[0], l)

@@ -6,13 +6,13 @@
 #This representation STILL takes a long time to solve for Graphplan
 #Took 2193.0940 seconds to find a valid plan - 30.7X slower than same problem on a 4x4 grid
 #No multi-step action implementation yet
-#No runner for many example configurations yet
+#No runner for any configuration yet
 
 #From here, I realize I made a mistake and that Occupies() is probably a simpler representational check. The answer is still 
-#correct in this version, just still not efficient. However, version 1 is still slow, so I aim to merge version 1 with the 
+#correct in this version, and still isn't efficient. I will backtrack back to version 1 and merge version 1 (STILL VERY SLOW) with the 
 #multistep-action feature, and my GUESS is that it will be VERY computationally expensive. So from there I will continue to convert 
-#to PDDL to debug and potentially find a better problem representation. Basically this route was a dead-end, but still I
-#documented it.
+#to PDDL to debug and potentially find a better problem representation that includes both features. Basically this route was a dead-end, 
+#but still I documented my process.
 #An additional note: the 6x6 grid feature is way more expensive on runtime than the multistep-actionset is, so maybe I will focus
 #on this 6x6 grid feature first before the multistep-actionset feature when debugging with PDDL/LLM suggestions on representational 
 #improvement.
@@ -20,12 +20,10 @@
 
 #--------------------------------------------------------------------------------------------------------
 
-import pytest
 from planning import *
 from logic import *
-import time
 
-def rush_hour_6x6_with_trucks(config):
+def rush_hour_6x6_with_trucks2(config):
     """
     Problem modifications:
     - Supports configuration for any valid rush_hour setup.
@@ -192,30 +190,3 @@ def rush_hour_6x6_with_trucks(config):
             'AdjacentUp(C2_6, C1_6) & AdjacentUp(C3_6, C2_6) & AdjacentUp(C4_6, C3_6) & AdjacentUp(C5_6, C4_6) & AdjacentUp(C6_6, C5_6)'
         )
     )
-
-if __name__ == "__main__":
-    p = rush_hour_6x6_with_trucks(config = {
-        'cars': {
-            'R': {'pos': (3, 1), 'dir': 'Horizontal'},   # Red car, horizontal
-            'A': {'pos': (1, 1), 'dir': 'Horizontal'},   # Car A, horizontal
-            'B': {'pos': (4, 3), 'dir': 'Vertical'}      # Car B, vertical
-        },
-        'trucks': {
-            'T1': {'pos': ((3, 2), (4, 2)), 'dir': 'Vertical'},  # Horizontal truck
-            'T2': {'pos': ((2, 3), (3, 3)), 'dir': 'Vertical'}     # Vertical truck
-        },
-        'goal': {
-            'R': (3, 4),                                 # Red car must reach exit
-            'T1': ((1, 2), (2, 2))                       # Truck T2 must move up two cells
-        }
-    })
-    # print(f"Initial: {p.initial}")
-    # print(f"Goals: {p.goals}")
-    # print(f"Actions: {p.actions}")
-    # print(f"Domain: {p.domain}")
-    start = time.time()
-    g = GraphPlan(p).execute()
-    l = Linearize(p).execute()
-    end = time.time()
-    print(f"Elapsed CPU time: {end-start} seconds")
-    print(g[0], l)

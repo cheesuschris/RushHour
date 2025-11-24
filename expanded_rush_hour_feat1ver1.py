@@ -5,7 +5,7 @@
 #This representation took a long time to solve for Graphplan
 #Took 2082.1370 seconds to find a valid plan - 29.1X slower than same problem on a 4x4 grid
 #No multi-step action implementation yet
-#No runner for many example configurations yet
+#No runner for any configuration yet
 
 #From here, the partially ordered and linearized plan returns from example_EC_1 and this file shows that the precondition, actions, 
 #and finalized plans required between the same problem on a 4x4 and a 6x6 grid are roughly the same (highlighted in check_6x6.py).
@@ -19,7 +19,6 @@
 
 from planning import *
 from logic import *
-import time
 
 def rush_hour_6x6_with_trucks(config):
     """
@@ -176,30 +175,3 @@ def rush_hour_6x6_with_trucks(config):
             'AdjacentUp(C2_6, C1_6) & AdjacentUp(C3_6, C2_6) & AdjacentUp(C4_6, C3_6) & AdjacentUp(C5_6, C4_6) & AdjacentUp(C6_6, C5_6)'
         )
     )
-    
-if __name__ == "__main__":
-    p = rush_hour_6x6_with_trucks(config = {
-        'cars': {
-            'R': {'pos': (3, 1), 'dir': 'Horizontal'},  
-            'A': {'pos': (1, 1), 'dir': 'Horizontal'},  
-            'B': {'pos': (4, 3), 'dir': 'Vertical'}     
-        },
-        'trucks': {
-            'T1': {'pos': ((3, 2), (4, 2)), 'dir': 'Vertical'},  
-            'T2': {'pos': ((2, 3), (3, 3)), 'dir': 'Vertical'}    
-        },
-        'goal': {
-            'R': (3, 4),                                
-            'T1': ((1, 2), (2, 2))                       
-        }
-    })
-    # print(f"Initial: {p.initial}")
-    # print(f"Goals: {p.goals}")
-    # print(f"Actions: {p.actions}")
-    # print(f"Domain: {p.domain}")
-    start = time.time()
-    g = GraphPlan(p).execute()
-    l = Linearize(p).execute()
-    end = time.time()
-    print(f"Elapsed CPU time: {end-start} seconds")
-    print(g[0], l)

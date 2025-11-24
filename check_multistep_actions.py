@@ -1,4 +1,4 @@
-if __name__ == "__main__":
+def compare_multistep():
     #Normal 4x4 Grid Partially Ordered & Linearized Plan
     #I'M ASSUMING P MEANS PRECONDITION
     set1 = set(["PCell(C3_2)", "PCell(C3_4)", "PAdjacentRight(C3_2, C3_3)", "PCell(C1_2)", "PCell(C2_2)", "PAdjacentDown(C2_2, C3_2)", "PCell(C3_1)", "PHorizontal(R)", "PVertical(T1)", "PCar(R)", "PAt(R, C3_1)", "TruckMoveUp(T1, C3_2, C4_2, C2_2)", "TruckMoveUp(T2, C2_3, C3_3, C1_3)", "PClear(C1_2)", "PClear(C3_4)", "PAdjacentRight(C3_3, C3_4)", "PCell(C3_3)", "PAdjacentUp(C2_2, C1_2)", "PTruck(T1)", "PAdjacentRight(C3_1, C3_2)"])
