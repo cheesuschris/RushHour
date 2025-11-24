@@ -11,9 +11,11 @@
 #From here, I realize I made a mistake and that Occupies() is probably a simpler representational check. The answer is still 
 #correct in this version, just still not efficient. However, version 1 is still slow, so I aim to merge version 1 with the 
 #multistep-action feature, and my GUESS is that it will be VERY computationally expensive. So from there I will continue to convert 
-#to PDDL to debug and potentially find a better problem representation.
+#to PDDL to debug and potentially find a better problem representation. Basically this route was a dead-end, but still I
+#documented it.
 #An additional note: the 6x6 grid feature is way more expensive on runtime than the multistep-actionset is, so maybe I will focus
-#on this 6x6 grid feature first before the multistep-actionset feature when debugging with PDDL/LLM suggestions on representational improvement.
+#on this 6x6 grid feature first before the multistep-actionset feature when debugging with PDDL/LLM suggestions on representational 
+#improvement.
 
 
 #--------------------------------------------------------------------------------------------------------

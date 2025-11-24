@@ -11,13 +11,15 @@
 #and finalized plans required between the same problem on a multistep action set is a good amount less (but still correct) than on a 
 #normal action set (highlighted in check_multistep_actions.py). While the overall action (path) cost with this multistep-action 
 #feature is less, it similarly explodes the search tree similarly to how the 6x6 grid does; this is due to the extreme precondition
-#checks, as well as many times more actions now available at each step. 
+#checks, as well as the many times more actions now available at each step. 
 #There are two things I'm concerned about with this implementation:
 # - I'm worried that the returned solution won't always slide as far as possible, or isn't at max efficiency (how does GraphPlan choose w/o a heuristic?)
+#  --> [RESOLVED] Upon further thought I realize the search BFS will always reach the shortest action first, so it will always choose a correct multi-action step
 # - I'm worried that for hard-coding multi-step actions for the 6x6 grid (there'll be way more than the ones here), the actions will explode the search tree.
 #For now, I'll accept this OK runtime and attempt merging this feature with the 6x6 grid feature. However, if this computationally
 #starts exploding the merged search tree, I'll try dynamic sliding or post-processing sliding (suggested by LLM) in future versions, 
 #and if that doesn't work then I will convert this feature or the merged version to PDDL and debug further. FOR NOW, this feature is OK.
+
 
 #--------------------------------------------------------------------------------------------------------
 
@@ -126,27 +128,27 @@ def rush_hour_multistep_with_trucks(config):
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
                 domain=expr('Car(c) & Cell(frm) & Cell(to) & AdjacentLeft(frm, to)')),
             Action('CarMoveLeftTwo(c, frm, between, to)',
-                precond=expr('At(c, frm) & Clear(to) & Horizontal(c) & AdjacentLeft(frm, between) & AdjacentLeft(between, to)'),
+                precond=expr('At(c, frm) & Clear(to) & Clear(between) & Horizontal(c) & AdjacentLeft(frm, between) & AdjacentLeft(between, to)'),
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
                 domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(to) & AdjacentLeft(frm, between) & AdjacentLeft(between, to)')),
             Action('CarMoveLeftThree(c, frm, between, between2, to)',
-                precond=expr('At(c, frm) & Clear(to) & Horizontal(c) & AdjacentLeft(frm, between) & AdjacentLeft(between, between2) & AdjacentLeft(between2, to)'),
+                precond=expr('At(c, frm) & Clear(to) & Clear(between) & Clear(between2) & Horizontal(c) & AdjacentLeft(frm, between) & AdjacentLeft(between, between2) & AdjacentLeft(between2, to)'),
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
                 domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(between2) & Cell(to) & AdjacentLeft(frm, between) & AdjacentLeft(between, between2) & AdjacentLeft(between2, to)')),
             Action('TruckMoveRight(t, t_head, t_tail, to)',
-                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Horizontal(t) & AdjacentRight(t_head, to)'),
+                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Horizontal(t) & AdjacentRight(t_tail, t_head) & AdjacentRight(t_head, to)'),
                     effect=expr('~Clear(to) & Occupies(t, to) & Clear(t_tail) & ~Occupies(t, t_tail)'),
                     domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to)')),
             Action('TruckMoveRightTwo(t, t_head, t_tail, to_head, to_tail)',
-                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Horizontal(t) & AdjacentRight(t_head, to_tail) & AdjacentRight(to_tail, to_head)'),
+                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Horizontal(t) & AdjacentRight(t_tail, t_head) & AdjacentRight(t_head, to_tail) & AdjacentRight(to_tail, to_head)'),
                     effect=expr('~Clear(to_tail) & Occupies(t, to_tail) & ~Clear(to_head) & Occupies(t, to_head) & Clear(t_tail) & ~Occupies(t, t_tail) & Clear(t_head) & ~Occupies(t, t_head)'),
                     domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to_head) & Cell(to_tail)')),
             Action('TruckMoveLeft(t, t_head, t_tail, to)',
-                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Horizontal(t) & AdjacentLeft(t_tail, to)'),
+                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Horizontal(t) & AdjacentLeft(t_head, t_tail) & AdjacentLeft(t_tail, to)'),
                     effect=expr('~Clear(to) & Occupies(t, to) & Clear(t_head) & ~Occupies(t, t_head)'),
                     domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to)')),
             Action('TruckMoveLeftTwo(t, t_head, t_tail, to_head, to_tail)',
-                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Horizontal(t) & AdjacentLeft(t_tail, to_head) & AdjacentLeft(to_head, to_tail)'),
+                    precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Horizontal(t) & AdjacentLeft(t_head, t_tail) & AdjacentLeft(t_tail, to_head) & AdjacentLeft(to_head, to_tail)'),
                     effect=expr('~Clear(to_tail) & Occupies(t, to_tail) & ~Clear(to_head) & Occupies(t, to_head) & Clear(t_tail) & ~Occupies(t, t_tail) & Clear(t_head) & ~Occupies(t, t_head)'),
                     domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to_head) & Cell(to_tail)')),
             # --- Vertical moves ---
@@ -157,11 +159,11 @@ def rush_hour_multistep_with_trucks(config):
             Action('CarMoveUpTwo(c, frm, between, to)',
                 precond=expr('At(c, frm) & Clear(to) & Clear(between) & Vertical(c) & AdjacentUp(frm, between) & AdjacentUp(between, to)'),
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
-                domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(to) & AdjacentLeft(frm, between) & AdjacentLeft(between, to)')),
+                domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(to) & AdjacentUp(frm, between) & AdjacentUp(between, to)')),
             Action('CarMoveUpThree(c, frm, between, between2, to)',
                 precond=expr('At(c, frm) & Clear(to) & Clear(between) & Clear(between2) & Vertical(c) & AdjacentUp(frm, between) & AdjacentUp(between, between2) & AdjacentUp(between2, to)'),
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
-                domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(between2) & Cell(to) & AdjacentLeft(frm, between) & AdjacentLeft(between, between2) & AdjacentLeft(between2, to)')),
+                domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(between2) & Cell(to) & AdjacentUp(frm, between) & AdjacentUp(between, between2) & AdjacentUp(between2, to)')),
             Action('CarMoveDown(c, frm, to)',
                 precond=expr('At(c, frm) & Clear(to) & Vertical(c) & AdjacentDown(frm, to)'),
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
@@ -175,21 +177,21 @@ def rush_hour_multistep_with_trucks(config):
                 effect=expr('At(c, to) & Clear(frm) & ~At(c, frm) & ~Clear(to)'),
                 domain=expr('Car(c) & Cell(frm) & Cell(between) & Cell(between2) & Cell(to) & AdjacentDown(frm, between) & AdjacentDown(between, between2) & AdjacentDown(between2, to)')),
             Action('TruckMoveUp(t, t_head, t_tail, to)',
-                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Vertical(t) & AdjacentUp(t_tail, to)'),
+                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Vertical(t) & AdjacentUp(t_head, t_tail) & AdjacentUp(t_tail, to)'),
                    effect=expr('Occupies(t, t_tail) & ~Clear(to) & Occupies(t, to) & Clear(t_head) & ~Occupies(t, t_head)'),
                    domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to)')),
             Action('TruckMoveUpTwo(t, t_head, t_tail, to_head, to_tail)',
-                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Vertical(t) & AdjacentUp(t_tail, to_head) & AdjacentUp(to_head, to_tail)'),
+                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Vertical(t) & AdjacentUp(t_head, t_tail) & AdjacentUp(t_tail, to_head) & AdjacentUp(to_head, to_tail)'),
                    effect=expr('~Clear(to_tail) & Occupies(t, to_tail) & ~Clear(to_head) & Occupies(t, to_head) & Clear(t_tail) & ~Occupies(t, t_tail) & Clear(t_head) & ~Occupies(t, t_head)'),
                    domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to_head) & Cell(to_tail)')),
             Action('TruckMoveDown(t, t_head, t_tail, to)',
-                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Vertical(t) & AdjacentDown(t_head, to)'),
+                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to) & Vertical(t) & AdjacentDown(t_tail, t_head) & AdjacentDown(t_head, to)'),
                    effect=expr('Occupies(t, t_head) & ~Clear(to) & Occupies(t, to) & Clear(t_tail) & ~Occupies(t, t_tail)'),
                    domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to)')),
             Action('TruckMoveDownTwo(t, t_head, t_tail, to_head, to_tail)',
-                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Vertical(t) & AdjacentDown(t_head, to_tail) & AdjacentDown(to_tail, to_head)'),
+                   precond=expr('Occupies(t, t_head) & Occupies(t, t_tail) & Clear(to_head) & Clear(to_tail) & Vertical(t) & AdjacentDown(t_tail, t_head) & AdjacentDown(t_head, to_tail) & AdjacentDown(to_tail, to_head)'),
                    effect=expr('~Clear(to_tail) & Occupies(t, to_tail) & ~Clear(to_head) & Occupies(t, to_head) & Clear(t_tail) & ~Occupies(t, t_tail) & Clear(t_head) & ~Occupies(t, t_head)'),
-                   domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to_head) & Cell(to_tail)'))
+                   domain=expr('Truck(t) & Cell(t_head) & Cell(t_tail) & Cell(to_head) & Cell(to_tail)')),
         ],
         domain=expr(
             # --- Car & Truck definitions ---
