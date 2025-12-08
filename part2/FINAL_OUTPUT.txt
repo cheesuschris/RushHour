@@ -1,0 +1,506 @@
+Loaded domain: 6x6_rush_hour_initial_domain.pddl
+Loaded problem: 6x6_rush_hour_initial_problem.pddl
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1492.6857 seconds
+Memory used: 132.20 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1550.5541 seconds
+Memory used: -117.81 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1512.7063 seconds
+Memory used: -8.09 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1525.8031 seconds
+Memory used: -118.22 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1507.3552 seconds
+Memory used: -11.91 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1505.1137 seconds
+Memory used: -6.41 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1503.1547 seconds
+Memory used: 73.42 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right(r, c3_1, c3_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-four(r, c3_2, c3_3, c3_4, c3_5, c3_6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1510.4539 seconds
+Memory used: 124.84 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1509.6609 seconds
+Memory used: -7.38 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1515.1219 seconds
+Memory used: -211.58 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward
+Time to solve: 0.0660 seconds
+Memory used: 7.52 MB
+fast-downward planner returned: SequentialPlan:
+    truck-move-down(t1, c4_2, c3_2, c5_2)
+    truck-move-up-three(t1, c5_2, c4_2, c3_2, c2_2, c1_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward-opt
+Time to solve: 0.0641 seconds
+Memory used: 2.45 MB
+fast-downward-opt planner returned: SequentialPlan:
+    truck-move-up-two(t1, c4_2, c3_2, c2_2, c1_2)
+    truck-move-up(t2, c3_3, c2_3, c1_3)
+    car-move-right-five(r, c3_1, c3_2, c3_3, c3_4, c3_5, c3_6)
+The plan is valid
+Loaded domain: 6x6_rush_hour_postprocessed_multistep_domain.pddl
+Loaded problem: 6x6_rush_hour_multistep_problem.pddl
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0173 seconds
+Memory used: 0.58 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0172 seconds
+Memory used: 0.06 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-down(t1, c2, r3, r4, r5)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    truck-move-up(t1, c2, r4, r5, r3)
+    car-move-right(r, r3, c4, c5)
+    truck-move-up(t1, c2, r3, r4, r2)
+    car-move-right(r, r3, c5, c6)
+    truck-move-up(t1, c2, r2, r3, r1)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0152 seconds
+Memory used: 0.00 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0154 seconds
+Memory used: 0.00 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0237 seconds
+Memory used: 0.92 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0293 seconds
+Memory used: 0.00 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 0.0786 seconds
+Memory used: 1.25 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 0.0239 seconds
+Memory used: 0.81 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 0.0337 seconds
+Memory used: 0.00 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 0.0293 seconds
+Memory used: 0.00 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward
+Time to solve: 0.0167 seconds
+Memory used: 0.16 MB
+fast-downward planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward-opt
+Time to solve: 0.0163 seconds
+Memory used: 0.08 MB
+fast-downward-opt planner returned: SequentialPlan:
+    truck-move-up(t1, c2, r3, r4, r2)
+    truck-move-up(t1, c2, r2, r3, r1)
+    car-move-right(r, r3, c1, c2)
+    truck-move-up(t2, c3, r2, r3, r1)
+    car-move-right(r, r3, c2, c3)
+    car-move-right(r, r3, c3, c4)
+    car-move-right(r, r3, c4, c5)
+    car-move-right(r, r3, c5, c6)
+The plan is valid
+Loaded domain: 6x6_rush_hour_actionsetprocessed_multistep_domain.pddl
+Loaded problem: 6x6_rush_hour_multistep_problem.pddl
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6486 seconds
+Memory used: 5.17 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6885 seconds
+Memory used: 0.12 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-down-1(t1, c2, r3, r4, r5)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+    truck-move-up-3(t1, c2, r1, r2, r3, r4, r5)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6530 seconds
+Memory used: 1.41 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6528 seconds
+Memory used: 0.09 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6530 seconds
+Memory used: 0.00 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.6859 seconds
+Memory used: 0.03 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hadd, hmax, hsa, hff, blind, lmcut, landmark}, Default: hadd
+    search, Type: Categorical, Choices: {wastar, astar, gbf, bfs, ehs, ids, sat}, Default: wastar
+
+Choosing algo pyperplan
+Time to solve: 1.7110 seconds
+Memory used: 0.95 MB
+pyperplan planner returned: SequentialPlan:
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-1(r, r3, c1, c2)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-4(r, r3, c2, c3, c4, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1.6503 seconds
+Memory used: 0.27 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1.6964 seconds
+Memory used: 0.17 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+Configuration space object:
+  Hyperparameters:
+    heuristic, Type: Categorical, Choices: {hmax, blind, lmcut}, Default: hmax
+    search, Type: Categorical, Choices: {astar, bfs, ids}, Default: astar
+
+Choosing algo pyperplan-opt
+Time to solve: 1.7049 seconds
+Memory used: 1.06 MB
+pyperplan-opt planner returned: SequentialPlan:
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward
+Time to solve: 0.0441 seconds
+Memory used: 0.00 MB
+fast-downward planner returned: SequentialPlan:
+    truck-move-down-1(t1, c2, r3, r4, r5)
+    truck-move-up-2(t1, c2, r2, r3, r4, r5)
+    truck-move-up-1(t1, c2, r1, r2, r3)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+The plan is valid
+Configuration space object:
+  Hyperparameters:
+
+Choosing algo fast-downward-opt
+Time to solve: 0.0440 seconds
+Memory used: 0.00 MB
+fast-downward-opt planner returned: SequentialPlan:
+    truck-move-up-2(t1, c2, r1, r2, r3, r4)
+    truck-move-up-1(t2, c3, r1, r2, r3)
+    car-move-right-5(r, r3, c1, c2, c3, c4, c5, c6)
+The plan is valid

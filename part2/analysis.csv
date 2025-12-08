@@ -1,0 +1,40 @@
+,,,,,,
+,Algorithm,Heuristic,Problem Category,CPU Time to Solve,Change in Memory Usage During Solve (including Garbage Collection),Explanation of Algorithm/Heuristic Performance
+,pyperplan,hadd,Initial 6x6 domain & Initial problem (unoptimized),1492.6857 s,132.20MB,hadd: h(s) = sum of costs achieving each part of overall goal independently. Good amount faster than others but may overestimate costs and not admissible.
+,pyperplan,hmax,Initial 6x6 domain & Initial problem (unoptimized),1550.5541 s,-117.81 MB,"hmax: h(s) = max(cost of each part of overall goal independently). IS THE SLOWEST, but solid guidance and admissible. Can underestimate."
+,pyperplan,hsa,Initial 6x6 domain & Initial problem (unoptimized),1512.7063 s,-8.09 MB,"hsa: hadd except sets of facts are remembered instead of independent parts of overall goal. More accurate than hadd, faster than hmax, but still not admissible."
+,pyperplan,hff,Initial 6x6 domain & Initial problem (unoptimized),1525.8031 s,-118.22 MB,hff: relaxed plan where h(s) = #actions in relaxed plan. Good guidance but plan extraction + compute costs is bad plus still not admissible.
+,pyperplan,blind,Initial 6x6 domain & Initial problem (unoptimized),1507.3552 s,-11.91 MB,"blind: 0 is returned for every state, literally no heuristic info besides brute force. No computational cost but explores huge parts of search space. Relatively fast."
+,pyperplan,lmcut,Initial 6x6 domain & Initial problem (unoptimized), 1505.1137 s, -6.41 MB,"lmcut: Repeatedly identifies landmarks to be achieved by any real plan and finds cuts (sets of actions) to achieve them. Adds min action cost for each cut, and IS ADMISSIBLE. Relatively fast."
+,pyperplan,landmark,Initial 6x6 domain & Initial problem (unoptimized),1503.1547 s,73.42 MB,"landmark: Landmarks MUST BE TRUE at some point in ALL valid plans. Strong heuristic, not admissible."
+,pyperplan-opt,blind,Initial 6x6 domain & Initial problem (unoptimized),1510.4539 s,124.84 MB,
+,pyperplan-opt,hmax,Initial 6x6 domain & Initial problem (unoptimized),1509.6609 s,-7.38 MB,"Pyperplan: Pure Python, which is SLOW. Basic searches include wastar, astar, gbf, bfs, ehs, ids, sat. DEFAULT THAT WAS USED IS wastar. Since the main task was to evaluate heuristics, I cared less about traversing or grid searching these."
+,pyperplan-opt,lmcut,Initial 6x6 domain & Initial problem (unoptimized),1515.1219 s,-211.58 MB,"Pyperplan-opt: Optimized Pyperplan w/ astar, bfs, ids searches, default being astar. OPTIMIZED data structures & BETTER PRUNING. For this task, not much difference between pyperplan and pyperplan-opt."
+,fast-downward,LAMA-first (according on documentation: https://github.com/aiplan4eu/up-fast-downward),Initial 6x6 domain & Initial problem (unoptimized),0.0660 s,7.52 MB,"fast-downward: HIGHLY OPTIMIZED C++ planner. REALLY fast due to C++ and also optimized algorithms (e.g. search engines, preferred operators, etc.)"
+,fast-downward-opt,A* with lmcut (according to LLM explanation; not in documentation),Initial 6x6 domain & Initial problem (unoptimized),0.0641 s,2.45 MB,"fast-downward-opt: Optimal planning config for fast-downward w/ basic searches being wastar, astar, gbf, bfs, ehs, ids, sat. Default that was used is wastar. Optimal solutions & also uses BEST admissible heuristic. fd & fd-opt are INSANELY fast."
+,pyperplan,hadd,6x6 postprocessed multistep domain & Multistep problem,0.0173 s,0.58 MB,
+,pyperplan,hmax,6x6 postprocessed multistep domain & Multistep problem,0.0172 s,0.06 MB,
+,pyperplan,hsa,6x6 postprocessed multistep domain & Multistep problem,0.0152 s,0.00 MB,
+,pyperplan,hff,6x6 postprocessed multistep domain & Multistep problem,0.0154 s,0.00 MB,
+,pyperplan,blind,6x6 postprocessed multistep domain & Multistep problem,0.0237 s,0.92 MB,
+,pyperplan,lmcut,6x6 postprocessed multistep domain & Multistep problem,0.0293 s,0.00 MB,
+,pyperplan,landmark,6x6 postprocessed multistep domain & Multistep problem,0.0786 s,1.25 MB,
+,pyperplan-opt,blind,6x6 postprocessed multistep domain & Multistep problem,0.0239 s,0.81 MB,
+,pyperplan-opt,hmax,6x6 postprocessed multistep domain & Multistep problem,0.0337 s,0.00 MB,
+,pyperplan-opt,lmcut,6x6 postprocessed multistep domain & Multistep problem,0.0293 s,0.00 MB,
+,fast-downward,LAMA-first (according on documentation: https://github.com/aiplan4eu/up-fast-downward),6x6 postprocessed multistep domain & Multistep problem,0.0167 s,0.16 MB,
+,fast-downward-opt,A* with lmcut (according to LLM explanation; not in documentation),6x6 postprocessed multistep domain & Multistep problem,0.0163 s,0.08 MB,
+,pyperplan,hadd,6x6 actionset multistep domain & Multistep problem,1.6486 s,5.17 MB,
+,pyperplan,hmax,6x6 actionset multistep domain & Multistep problem,1.6885 s,0.12 MB,
+,pyperplan,hsa,6x6 actionset multistep domain & Multistep problem,1.6530 s,1.41 MB,
+,pyperplan,hff,6x6 actionset multistep domain & Multistep problem,1.6528 s,0.09 MB,
+,pyperplan,blind,6x6 actionset multistep domain & Multistep problem, 1.6530 s,0.00 MB,
+,pyperplan,lmcut,6x6 actionset multistep domain & Multistep problem,1.6859 s,0.03 MB,
+,pyperplan,landmark,6x6 actionset multistep domain & Multistep problem,1.7110 s,0.95 MB,
+,pyperplan-opt,blind,6x6 actionset multistep domain & Multistep problem,1.6503 s,0.27 MB,
+,pyperplan-opt,hmax,6x6 actionset multistep domain & Multistep problem,1.6964 s,0.17 MB,
+,pyperplan-opt,lmcut,6x6 actionset multistep domain & Multistep problem,1.7049 s,1.06 MB,
+,fast-downward,LAMA-first (according on documentation: https://github.com/aiplan4eu/up-fast-downward),6x6 actionset multistep domain & Multistep problem,0.0441 s,0.00 MB,
+,fast-downward-opt,A* with lmcut (according to LLM explanation; not in documentation),6x6 actionset multistep domain & Multistep problem,0.0440 s,0.00 MB,
+,,,,,,
+,Github Repository w/ Instructions/Walkthrough in README.md for Part 2: https://github.com/cheesuschris/RushHour,,,,,
